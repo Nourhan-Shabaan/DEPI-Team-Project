@@ -10,6 +10,10 @@ namespace Freelance_Manager.Models
     {
         private decimal _amount;
         private Payment() { }
+        public DateTime Date { get; set; }
+        public PaymentStatus Status { get; set; }
+        public int Id { get; private set; }
+
 
         public Payment(int projectId, decimal amount, DateTime date)
         {
@@ -19,7 +23,7 @@ namespace Freelance_Manager.Models
             Status = PaymentStatus.Pending;
         }
 
-        public int Id { get; private set; }
+      
         public decimal Amount
         {
             get => _amount;
@@ -31,8 +35,7 @@ namespace Freelance_Manager.Models
             }
         }
 
-        public DateTime Date { get; set; }
-        public PaymentStatus Status { get; set; }
+       
 
         #region Payment -> Project
 

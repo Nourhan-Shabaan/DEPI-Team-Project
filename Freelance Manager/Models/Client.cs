@@ -35,7 +35,7 @@ namespace Freelance_Manager.Models
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Client email cannot be empty.");
-                if (!value.Contains('@') || value.StartsWith('@') || value.EndsWith('@'))
+                if (!value.Contains('@') || value.StartsWith('@') || value.EndsWith('@') )
                     throw new ArgumentException("Client email is not valid.");
                 _email = value.Trim();
             }

@@ -1,8 +1,6 @@
-﻿using Freelance_Manager.Data;
-using Freelance_Manager.Enums;
-using Freelance_Manager.Services;
+﻿using System;
+using Freelance_Manager.Data;
 using Microsoft.EntityFrameworkCore;
-using TaskStatusEnum = Freelance_Manager.Enums.MyTaskStatus;
 
 namespace Freelance_Manager
 {
@@ -10,6 +8,26 @@ namespace Freelance_Manager
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            try
+            {
+                using var db = new AppDbContext();
+                // Apply pending EF Core migrations before opening the menus.
+                db.Database.Migrate();
+
+                var ui = new ConsoleUI(db);
+                ui.Run();
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The application could not start:");
+                Console.WriteLine(ex.Message);
+                Console.ResetColor();
+                Console.WriteLine("Make sure SQL Server is running and the connection string is correct. Press Enter to exit.");
+                Console.ReadLine();
+            }
         }
     }
 }
